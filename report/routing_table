@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler'
+Bundler.setup :default
+
+require 'gli'
+require 'trema'
+
+# patch_panel command
+module RoutingTablelApp
+  include Pio
+  extend GLI::App
+
+  desc 'show routing table'
+  command :show_db do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+    c.action do |_global_options, options, args|
+      puts("routing table")
+      db = Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+        show_db
+      db.each do |each|
+        each.each_key do |key|
+#          tmp[IPv4Address.new(key).to_s] = each[key].to_s
+          print "Dest : ", IPv4Address.new(key).to_s, "/", key.to_i, "\n"
+          print "Next : ", each[key].to_s, "\n"
+        end
+      end
+    end
+  end
+
+  desc 'add forwardind entry'
+  arg_name 'dest netmask next'
+  command :add do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+    c.action do |_global_options, options, args|
+      Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+      add_db_entry(args[0], args[1], args[2])
+    end
+  end
+
+  desc 'delete forwardind entry'
+  arg_name 'dest netmask'
+  command :delete do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+    c.action do |_global_options, options, args|
+      Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+      delete_db_entry(args[0], args[1], nil)
+    end
+  end
+
+  desc 'show interfaces'
+  command :show_interfaces do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+    c.action do |_global_options, options, args|
+      interfaces = Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+      show_interface
+      interfaces.each do |each|
+        print "port : ", each[:port_number].to_s, ", MAC : ", each[:mac_address], ", IP : ", each[:ip_address], "/", each[:netmask_length].to_s, "\n"
+      end
+    end
+  end
+
+  exit run(ARGV)
+end

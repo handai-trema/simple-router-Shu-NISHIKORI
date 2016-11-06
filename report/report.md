@@ -69,6 +69,7 @@ routing_table
     end
   end
 
+
 simple_router.rb
   def add_db_entry(destination_ip, netmask_length, next_hop)
     options = {:destination => destination_ip, :netmask_length => netmask_length.to_i, :next_hop => next_hop}
@@ -79,6 +80,7 @@ simple_router.rb
     options = {:destination => destination_ip, :netmask_length => netmask_length.to_i, :next_hop => next_hop}
     @routing_table.delete(options)
   end
+
 
 routing_table.rb
   def add(options)	#改変なし
@@ -93,11 +95,11 @@ routing_table.rb
     @db[netmask_length].delete(prefix.to_i)
   end
 ```
-追加については，最初からrouting_table.rbにあるaddメソッドを利用した．addメソッド内で使用されている変数はnetmask_length, destination, next_hopの3つなので，これを引数とした．ただし，netmask_lengthに関しては，db配列のインデックスに使用されているようなので，routing_table.rbに渡す際にto_iで整数型に変換している．  
-削除についても追加と同様に作成した．ただし，転送エントリを削除する際に次ホップを指定する必要はないと考えたので，simple_router.rbに渡す際のnext_hopの中身はnilとした．
+追加については，最初からrouting_table.rbにあるaddメソッドを利用した．addメソッド内で使用されている変数はnetmask_length, destination, next_hopの3つなので，これを実行コマンドの引数とした．ただし，netmask_lengthに関しては，db配列のインデックスに使用されているようなので，routing_table.rbに渡す際にto_iで整数型に変換している．  
+削除についても追加と同様に作成した．ただし，転送エントリを削除する際に次ホップを指定する必要はないと考えたので，引数としてnext_hopはなく，代わりにsimple_router.rbに渡す際のnext_hopの中身をnilとした．
 
 ###ルータのインターフェース一覧の表示
-[@成元くん](https://github.com/handai-trema/simple-router-r-narimoto/blob/master/report.md)のレポートを参考にしました．ありがとうございました．
+[成元くん](https://github.com/handai-trema/simple-router-r-narimoto/blob/master/report.md)のレポートを参考にしました．ありがとうございました．
 ```
 routing_table
   desc 'show interfaces'
@@ -113,6 +115,7 @@ routing_table
     end
   end
 
+
 simple_router.rb
   def show_interface
     ret = Array.new()
@@ -122,11 +125,11 @@ simple_router.rb
     return ret
   end
 ```
-インターフェースの中身には，Interfaceの変数port_number， mac_address， ip_address， netmask_lengthからアクセスできる．Interfaceの全要素について保持する変数retを用意し，各ポートごとの情報を格納させた．そして，それをrouting_tableに返しrouting_tableで走査させることで表示されている．
+インターフェースの中身には，Interfaceの変数port_number， mac_address， ip_address， netmask_lengthからアクセスできる．Interfaceの全要素について保持する変数retを用意し，各ポートごとの情報を格納させた．そしてそれをrouting_tableに返して，routing_tableで走査させることで表示させている．
 
 
 ###動作確認
-simple_router.rbには，付属のtrema.confを設定ファイルとして指定している．
+simple_router.rbの実行の際には，付属のtrema.confを設定ファイルとして指定している．
 ```
 simple_router.rb
 vswitch('0x1') { dpid 0x1 }
