@@ -130,19 +130,19 @@ simple_router.rb
 
 ###動作確認
 ```
-$ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show
+$ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show_db
 routing table
 Dest : 0.0.0.0/0
 Next : 192.168.1.2
 $ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table add 192.168.3.2 24 192.168.2.2
-ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show
+ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show_db
 routing table
 Dest : 0.0.0.0/0
 Next : 192.168.1.2
 Dest : 192.168.3.2/24
 Next : 192.168.2.2
 $ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table delete 192.168.3.2 24
-$ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show
+$ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show_db
 routing table
 Dest : 0.0.0.0/0
 Next : 192.168.1.2
