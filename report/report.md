@@ -3,9 +3,9 @@
 
 ##解答
 書き加えたソースコードは以下である．  
-* [./lib/simple_router.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/simple_router.rb)  
-* [./lib/routing_table.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table.rb)  
-* [./bin/simple_router](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table)  
+* [simple_router.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/simple_router.rb)  
+* [routing_table.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table.rb)  
+* [routing_table](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table)  
 
 ###ルーティングテーブルの表示
 書き加えたコードは以下である．
