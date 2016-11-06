@@ -129,23 +129,6 @@ simple_router.rb
 
 
 ###動作確認
-simple_router.rbの実行の際には，付属のtrema.confを設定ファイルとして指定している．
-```
-simple_router.rb
-vswitch('0x1') { dpid 0x1 }
-netns('host1') {
-  ip '192.168.1.2'
-  netmask '255.255.255.0'
-  route net: '0.0.0.0', gateway: '192.168.1.1'
-}
-netns('host2') {
-  ip '192.168.2.2'
-  netmask '255.255.255.0'
-  route net: '0.0.0.0', gateway: '192.168.2.1'
-}
-link '0x1', 'host1'
-link '0x1', 'host2'
-```
 ```
 $ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table show
 routing table
@@ -167,4 +150,4 @@ ensyuu2@ensyuu2-VirtualBox:~/simple-router-Shu-NISHIKORI$ ./bin/routing_table sh
 port : 1, MAC : 01:01:01:01:01:01, IP : 192.168.1.1/24
 port : 2, MAC : 02:02:02:02:02:02, IP : 192.168.2.1/24
 ```
-.confファイルの内容通りに表示されており，追加/削除したエントリも反映されていることを確認した．
+経路表やインタフェースが正しく表示されており，追加/削除したエントリも反映されていることを確認した．
