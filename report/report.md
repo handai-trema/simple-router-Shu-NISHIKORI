@@ -4,7 +4,7 @@
 ##解答
 書き加えたソースコードは以下である．  
 * [./lib/simple_router.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/simple_router.rb)  
-* [./lib/routing_table.conf](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table.rb)  
+* [./lib/routing_table.rb](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table.rb)  
 * [./bin/simple_router](https://github.com/handai-trema/simple-router-Shu-NISHIKORI/blob/develop/report/routing_table)  
 
 ###ルーティングテーブルの表示
@@ -99,7 +99,7 @@ routing_table.rb
 削除についても追加と同様に作成した．ただし，転送エントリを削除する際に次ホップを指定する必要はないと考えたので，引数としてnext_hopはなく，代わりにsimple_router.rbに渡す際のnext_hopの中身をnilとした．
 
 ###ルータのインターフェース一覧の表示
-[成元くん](https://github.com/handai-trema/simple-router-r-narimoto/blob/master/report.md)のレポートを参考にしました．ありがとうございました．
+[成元くんのレポート](https://github.com/handai-trema/simple-router-r-narimoto/blob/master/report.md)を参考にしました．ありがとうございました．
 ```
 routing_table
   desc 'show interfaces'
